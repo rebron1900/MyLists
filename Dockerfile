@@ -13,7 +13,8 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # 构建时需要的占位环境变量（实际运行时会被覆盖）
-ENV NODE_ENV=production
+# 构建时使用 development 避免 REDIS 强制检查
+ENV NODE_ENV=development
 ENV ADMIN_PASSWORD=build_placeholder_12345678
 ENV ADMIN_TOKEN_SECRET=build_placeholder_secret_20chars
 ENV ADMIN_MAIL_USERNAME=build@example.com
@@ -32,6 +33,10 @@ ENV LLM_API_KEY=build_placeholder
 ENV LLM_MODEL_ID=build_placeholder
 ENV LLM_BASE_URL=https://example.com
 ENV REDIS_ENABLED=false
+ENV VITE_BASE_URL=http://localhost:3000
+ENV VITE_PUBLIC_POSTHOG_KEY=build_placeholder
+ENV VITE_PUBLIC_POSTHOG_HOST=build_placeholder
+ENV VITE_PUBLIC_POSTHOG_UI_HOST=build_placeholder
 
 # 构建应用
 RUN bun run build
