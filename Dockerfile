@@ -4,10 +4,10 @@ FROM oven/bun:1-alpine AS builder
 WORKDIR /app
 
 # 复制依赖文件
-COPY package.json bun.lock* ./
+COPY package.json ./
 
-# 安装依赖
-RUN bun install --frozen-lockfile
+# 安装依赖（无锁文件）
+RUN bun install
 
 # 复制源代码
 COPY . .
