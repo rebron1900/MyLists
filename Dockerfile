@@ -4,8 +4,8 @@ WORKDIR /usr/src/app
 
 # 安装依赖
 FROM base AS install
-COPY package.json bun.lockb ./
-RUN bun install --frozen-lockfile
+COPY package.json bun.lockb* ./
+RUN bun install
 
 # 构建应用
 FROM base AS prerelease
